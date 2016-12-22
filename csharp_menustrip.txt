@@ -1,7 +1,7 @@
-что бы дочернее меню не сливалось с главной формой необходимо в главном меню в свойствах выставить 
+п»їС‡С‚Рѕ Р±С‹ РґРѕС‡РµСЂРЅРµРµ РјРµРЅСЋ РЅРµ СЃР»РёРІР°Р»РѕСЃСЊ СЃ РіР»Р°РІРЅРѕР№ С„РѕСЂРјРѕР№ РЅРµРѕР±С…РѕРґРёРјРѕ РІ РіР»Р°РІРЅРѕРј РјРµРЅСЋ РІ СЃРІРѕР№СЃС‚РІР°С… РІС‹СЃС‚Р°РІРёС‚СЊ 
 Need to set the AllowMerge property of the MenuStrip to false.
 
-Отслеживание капса и нумлока
+СњС‚СЃР»РµР¶РёРІР°РЅРёРµ РєР°РїСЃР° Рё РЅСѓРјР»РѕРєР°
 protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
@@ -10,7 +10,7 @@ protected override void WndProc(ref Message m)
             NumLockStatus.ForeColor = IsKeyLocked(Keys.NumLock) ? statusStrip1.ForeColor : statusStrip1.BackColor;
         }
 
-		или повесить на обработчик нажатиЯ клавиши
+		РёР»Рё РїРѕРІРµСЃРёС‚СЊ РЅР° РѕР±СЂР°Р±РѕС‚С‡РёРє РЅР°Р¶Р°С‚РёСЏ РєР»Р°РІРёС€Рё
 		
 		if ((e.KeyCode & Keys.KeyCode) == Keys.CapsLock)
             {
