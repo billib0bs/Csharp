@@ -1,0 +1,6 @@
+//Create and start
+SqlLocalDb create "MyInstance"
+SqlLocalDb start "MyInstance"
+or
+SqlLocalDb create "MyInstance" -s
+SqlLocalDb i "MyInstance"

@@ -1,0 +1,32 @@
+что бы дочернее меню не сливалось с главной формой необходимо в главном меню в свойствах выставить 
+Need to set the AllowMerge property of the MenuStrip to false.
+
+ќтслеживание капса и нумлока
+protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+           // statusStrip1.Items[1].ForeColor = IsKeyLocked(Keys.CapsLock) ? statusStrip1.Items[1].ForeColor : statusStrip1.Items[1].BackColor;
+            CapsLockStatus.ForeColor = IsKeyLocked(Keys.CapsLock) ? statusStrip1.ForeColor : statusStrip1.BackColor;
+            NumLockStatus.ForeColor = IsKeyLocked(Keys.NumLock) ? statusStrip1.ForeColor : statusStrip1.BackColor;
+        }
+
+		или повесить на обработчик нажатия клавиши
+		
+		if ((e.KeyCode & Keys.KeyCode) == Keys.CapsLock)
+            {
+                if (Control.IsKeyLocked(Keys.CapsLock))
+                    //this.statusStrip1.Items[1].Text = "Caps is activated.";
+                    this.statusStrip1.Items[1].ForeColor=SystemColors.ControlText;
+                else
+                    //this.statusStrip1.Items[1].Text = "Caps is Deactivated.";
+                    this.statusStrip1.Items[1].ForeColor = SystemColors.AppWorkspace;
+            }
+            else if ((e.KeyCode & Keys.KeyCode) == Keys.NumLock)
+            {
+                if (Control.IsKeyLocked(Keys.NumLock))
+                    //this.statusStrip1.Items[1].Text = "NumLock is activated.";
+                    this.statusStrip1.Items[2].ForeColor = SystemColors.ControlText;
+                else
+                    //this.statusStrip1.Items[1].Text = "NumLock is Deactivated.";
+                    this.statusStrip1.Items[2].ForeColor = SystemColors.AppWorkspace;
+            }

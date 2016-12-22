@@ -1,0 +1,41 @@
+//Таблица территориальных учереждений
+CREATE TABLE [dbo].[tb_tu] (
+    [id_tu]   UNIQUEIDENTIFIER DEFAULT (newid()) NOT NULL,
+    [tu_name] NCHAR (50)       NULL,
+    PRIMARY KEY CLUSTERED ([id_tu] ASC)
+);
+
+CREATE TABLE [dbo].[tb_usertu] (
+    [id_usertu]          UNIQUEIDENTIFIER DEFAULT (newid()) NOT NULL,
+    [usertu_surname]     NVARCHAR (50)    NULL,
+    [usertu_name]        NVARCHAR (50)    NULL,
+    [usertu_middlename]  NVARCHAR (50)    NULL,
+    [usertu_dolgnost]    NVARCHAR (50)    NULL,
+    [usertu_telephone]   NVARCHAR (50)    NULL,
+    [usertu_rukovodstvo] NVARCHAR (50)    NULL,
+    [id_tu]              UNIQUEIDENTIFIER NULL,
+    PRIMARY KEY CLUSTERED ([id_usertu] ASC),
+    CONSTRAINT [FK_tb_usertu_ToTable] FOREIGN KEY ([id_tu]) REFERENCES [dbo].[tb_tu] ([id_tu])
+);
+
+CREATE TABLE [dbo].[tb_firms] (
+    [id_firms]   UNIQUEIDENTIFIER DEFAULT (newid()) NOT NULL,
+    [firms_name] NVARCHAR (50)    NULL,
+    PRIMARY KEY CLUSTERED ([id_firms] ASC)
+);
+
+CREATE TABLE [dbo].[tb_emplfirm] (
+    [id_emplfirm]       UNIQUEIDENTIFIER DEFAULT (newid()) NOT NULL,
+    [empl_surname]      NCHAR (10)       NULL,
+    [empl_name]         NCHAR (10)       NULL,
+    [empl_middlename]   NCHAR (10)       NULL,
+    [empl_passpseria]   NCHAR (10)       NULL,
+    [empl_passpnumber]  NCHAR (10)       NULL,
+    [empl_passdate]     NCHAR (10)       NULL,
+    [empl_passissuedby] NCHAR (10)       NULL,
+    [empl_tel]          NCHAR (10)       NULL,
+    [id_firms]          UNIQUEIDENTIFIER NULL,
+    PRIMARY KEY CLUSTERED ([id_emplfirm] ASC),
+    CONSTRAINT [FK_tb_emplfirm_ToTable] FOREIGN KEY ([id_firms]) REFERENCES [dbo].[tb_firms] ([id_firms])
+);
+

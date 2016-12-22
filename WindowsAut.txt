@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Security.Principal;
+
+namespace ppo_admin
+{
+    public partial class FormSetting : Form
+    {
+
+        //Password pwd;
+        [System.Runtime.InteropServices.DllImport("advapi32.dll")]
+        public static extern bool LogonUser(string userName, string domainName, string password, int LogonType, int LogonProvider, ref IntPtr phToken); 
+    
+        public FormSetting()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string username = GetloggedinUserName();
+            bool issuccess = false;
+            
+            if (username.ToLowerInvariant().Contains(textBox1.Text.Trim().ToLowerInvariant()) && username.ToLowerInvariant().Contains(textBox3.Text.Trim().ToLowerInvariant()))
+            {
+                issuccess = IsValidateCredentials(textBox1.Text.Trim(), textBox2.Text.Trim(), textBox3.Text.Trim());
+                //MessageBox.Show(username);
+            }
+
+            if (issuccess)
+                MessageBox.Show("Successfuly Login !!!");
+            else
+                MessageBox.Show("User Name / Password / Domain is invalid !!!"); 
+
+        }
+
+        private string GetloggedinUserName()
+        {
+            System.Security.Principal.WindowsIdentity currentUser = System.Security.Principal.WindowsIdentity.GetCurrent();
+            return currentUser.Name;
+        }
+        private bool IsValidateCredentials(string userName, string password, string domain)
+        {
+            IntPtr tokenHandler = IntPtr.Zero;
+            bool isValid = LogonUser(userName, domain, password, 2, 0, ref tokenHandler);
+            return isValid;
+        } 
+
+        
+    }
+}

@@ -1,0 +1,39 @@
+///1. Создание 
+            DataSet dSet = new DataSet("Univer");
+
+            ///2. Создание таблицы
+            DataTable dTable = new DataTable("Students");
+
+            ///3. Создание колонок 
+            ///Колонка с именем ID
+            DataColumn idColumn = new DataColumn("",typeof(int));
+            idColumn.Unique = true;
+            idColumn.AutoIncrement = true;
+            idColumn.AutoIncrementSeed = 1;
+            idColumn.AutoIncrementStep = 1;
+            
+            DataColumn Name = new DataColumn("Name", typeof(string));
+            DataColumn Surname = new DataColumn("Surname", typeof(string));
+            DataColumn Age = new DataColumn("Age", typeof(int));
+
+            //DataColumn в DataTabale
+            dTable.Columns.AddRange(new DataColumn[] { idColumn, Name, Surname, Age });
+
+
+            //Создание datarow  
+            DataRow row1 = dTable.NewRow();
+            row1["Name"] = "John";
+            row1["Surname"] = "Hamilton";
+            row1["Age"] = 23;
+
+            DataRow row2 = dTable.NewRow();
+            row2[1] = "Mary";
+            row2[2] = "Hamilton";
+            row2[3] = 18;
+
+            //datarow to datatable
+            dTable.Rows.Add(row1);
+            dTable.Rows.Add(row2);
+
+            //datatable to dataset
+            dSet.Tables.Add(dTable);
